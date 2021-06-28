@@ -1,0 +1,9 @@
+[package]
+name = "anchor"
+version = "0.1.0"
+authors = ["Sean Ma <seanmaxiaoqiang@icloud.com>"]
+edition = "2018"
+repository = "https://github.com/seanmaxiaoqiang/anchor"
+
+
+[dependencies]
