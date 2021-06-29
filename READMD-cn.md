@@ -1,0 +1,3 @@
+#anchor
+
+anchor是一个学习tokio异步编程的样例。anchor建立一个后台线程，维护一个内部的HashMap保持KV对象，HashMap通过Mutex互斥量来保持线程安全。anchor仅供学习使用。
