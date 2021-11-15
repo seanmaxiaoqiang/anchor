@@ -24,18 +24,19 @@ CREATE TABLE `trade_data_type` (
 
 
 ### 交易数据
-CREATE TABLE `tdx`.`trade_data` (
-  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-  `trade_code` VARCHAR(15) NULL DEFAULT '',
-  `trade_date` DATETIME NULL,
-  `open` BIGINT(20) NULL,
-  `high` BIGINT(20) NULL,
-  `low` BIGINT(20) NULL,
-  `close` BIGINT(20) NULL,
-  `volume` BIGINT(20) NULL COMMENT '单位(手)',
-  `amount` DOUBLE NULL,
+CREATE TABLE `trade_data` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `trade_code` varchar(15) DEFAULT '',
+  `trade_date` datetime DEFAULT NULL,
+  `open` bigint DEFAULT NULL,
+  `high` bigint DEFAULT NULL,
+  `low` bigint DEFAULT NULL,
+  `close` bigint DEFAULT NULL,
+  `volume` bigint DEFAULT NULL COMMENT '单位(手)',
+  `amount` double DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COMMENT = '###      日期	    开盘	    最高	    最低	    收盘	    成交量	    成交额\n### 19910102,127.61,128.84,127.61,128.84,91,59000.00\n';
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `idx_trade_code` (`trade_code`),
+  KEY `idx_trade_code_date` (`trade_code`,`trade_date`),
+  CONSTRAINT `fk_trade_code` FOREIGN KEY (`trade_code`) REFERENCES `trade_data_type` (`type_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='###      日期	    开盘	    最高	    最低	    收盘	    成交量	    成交额\n### 19910102,127.61,128.84,127.61,128.84,91,59000.00\n';
