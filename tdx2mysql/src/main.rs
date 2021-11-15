@@ -8,10 +8,10 @@ use encoding::all::GBK;
 use encoding::{Encoding, EncoderTrap, DecoderTrap};
 
 fn main() {
-     let mut file = File::open("./tdx/SH#999999.txt").expect("file not found");
+     let file = File::open("./tdx/SH#999999.txt").expect("file not found");
     let reader = BufReader::new(&file);
 
-    let mut lines = reader.split(b'\n').map(|l| l.unwrap());
+    let lines = reader.split(b'\n').map(|l| l.unwrap());
 
     for line in lines {
         let decoded_string = GBK.decode(&line, DecoderTrap::Strict).unwrap();
