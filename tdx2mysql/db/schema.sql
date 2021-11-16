@@ -1,6 +1,9 @@
 ### database
 CREATE DATABASE IF NOT EXISTS tdx DEFAULT CHARACTER SET utf8mb4;
 
+CREATE USER 'user'@'%' IDENTIFIED BY 'Password';
+grant all privileges on *.* to 'user'@'%';
+create database tdx character set utf8mb4;
 USE tdx;
 
 ### tables
