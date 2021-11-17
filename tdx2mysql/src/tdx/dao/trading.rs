@@ -1,10 +1,10 @@
 use sqlx::{Error, MySql, Pool, FromRow};
 use sqlx::mysql::MySqlQueryResult;
 use serde::{Deserialize, Serialize};
-
+use chrono::{offset::TimeZone, DateTime, Local, NaiveDateTime};
 
 #[derive(Serialize, Deserialize, Debug, FromRow, Clone)]
-pub struct data_type {
+pub struct TradingDataType {
     pub type_code: String,
     pub stock_code: String,
     pub title: String,
@@ -13,11 +13,11 @@ pub struct data_type {
     pub precision: i32,
 }
 
-#[derive(Serialize, Deserialize, Debug, FromRow, Clone)]
-pub struct data {
+#[derive(Debug, FromRow, Clone)]
+pub struct TradingData {
     pub id: u64,
     pub trade_code: String,
-    pub trade_date: Datetime,
+    pub trade_date: chrono::NaiveDateTime,
     pub open: u64,
     pub high: u64,
     pub low: u64,
@@ -25,3 +25,4 @@ pub struct data {
     pub volume: u64,
     pub amount:f64,
 }
+
