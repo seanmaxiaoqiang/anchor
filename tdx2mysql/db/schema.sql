@@ -39,6 +39,7 @@ CREATE TABLE `trade_data` (
   `amount` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `unq_trade_code_date` (`trade_code`,`trade_date`),
   KEY `idx_trade_code` (`trade_code`),
   KEY `idx_trade_code_date` (`trade_code`,`trade_date`),
   CONSTRAINT `fk_trade_code` FOREIGN KEY (`trade_code`) REFERENCES `trade_data_type` (`type_code`)
