@@ -1,9 +1,11 @@
-use sqlx::{Error, MySql, Pool, FromRow};
-use sqlx::mysql::MySqlQueryResult;
-use serde::{Deserialize, Serialize};
-use chrono::{offset::TimeZone, DateTime, Local, NaiveDateTime};
+//use sqlx::{Error, MySql, Pool, FromRow};
+//use sqlx::FromRow;
+//use sqlx::mysql::MySqlQueryResult;
+//use serde::{Deserialize, Serialize};
+//use chrono::{offset::TimeZone, DateTime, Local, NaiveDateTime};
 
-#[derive(Serialize, Deserialize, Debug, FromRow, Clone)]
+//#[derive(Serialize, Deserialize, Debug, FromRow, Clone)]
+#[derive(Debug, Clone)]
 pub struct TradingDataType {
     pub type_code: String,
     pub stock_code: String,
@@ -13,7 +15,8 @@ pub struct TradingDataType {
     pub precision: i32,
 }
 
-#[derive(Debug, FromRow, Clone)]
+//#[derive(Debug, FromRow, Clone)]
+#[derive(Debug, Clone)]
 pub struct TradingData {
     pub id: u64,
     pub trade_code: String,
@@ -26,3 +29,12 @@ pub struct TradingData {
     pub amount:f64,
 }
 
+impl TradingData {
+    pub fn save_db(self, conn : &mut sqlx::mysql::MySqlConnection) {
+        let sql = r#"insert into trade_data (trade_code, trade_date, open, high, low, close, volume, amount) value (?, ?, ?, ?, ?, ?, ?, ?);"#;
+        let affect_rows = sqlx::query(sql)
+                            .bind(self.trade_code).bind(self.trade_date)
+                            .bind(self.open).bind(self.high).bind(self.low).bind(self.close)
+                            .bind(self.volume).bind(self.amount).execute(conn);
+    }
+}

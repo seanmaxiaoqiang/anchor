@@ -1,16 +1,15 @@
 extern crate encoding;
 
 use chrono::{offset::TimeZone, DateTime, Local, NaiveDateTime};
-use std::fmt::Error;
 use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufReader;
 
 use encoding::all::GBK;
-use encoding::{Encoding, EncoderTrap, DecoderTrap};
+use encoding::{Encoding, DecoderTrap};
 
 mod dao;
-use dao::trading::{TradingDataType,TradingData};
+use dao::trading::{TradingData};
 
 pub fn open_export_file(pathname: &str) {
     let file = File::open(pathname).expect("file not found");
@@ -28,12 +27,12 @@ pub fn open_export_file(pathname: &str) {
 }
 
 fn line_parser(line_num:u32, line:&str){
-    let mut trade_code = String::from("default");
+    let trade_code = String::from("default");
     match line_num {
         1 => data_header(line),
         2 => data_title(line),
         _ => {
-            let r = one_data(line_num, &trade_code, line.trim_matches('\r'));
+            let _r = one_data(line_num, &trade_code, line.trim_matches('\r'));
         },
     }
 }
