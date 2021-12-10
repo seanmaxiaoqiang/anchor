@@ -32,7 +32,7 @@ pub struct TradingData {
 impl TradingData {
     pub fn save_db(self, conn : &mut sqlx::mysql::MySqlConnection) {
         let sql = r#"insert into trade_data (trade_code, trade_date, open, high, low, close, volume, amount) value (?, ?, ?, ?, ?, ?, ?, ?);"#;
-        let affect_rows = sqlx::query(sql)
+        let _affect_rows = sqlx::query(sql)
                             .bind(self.trade_code).bind(self.trade_date)
                             .bind(self.open).bind(self.high).bind(self.low).bind(self.close)
                             .bind(self.volume).bind(self.amount).execute(conn);

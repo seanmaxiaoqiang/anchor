@@ -8,6 +8,6 @@ edition = "2021"
 [dependencies]
 chrono = "0.4"
 encoding = "0.2.33"
-sqlx = { version = "0.5.6", features = ["mysql", "runtime-tokio-rustls"] }
+sqlx = { version = "0.5.6", features = ["mysql", "runtime-tokio-rustls", "chrono"] }
 tokio = { version = "1.13", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
